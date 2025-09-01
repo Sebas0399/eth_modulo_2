@@ -1,0 +1,290 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_limiteDepositos",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "monto",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "detalle",
+						"type": "string"
+					}
+				],
+				"name": "LimiteDinero",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "monto",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "detalle",
+						"type": "string"
+					}
+				],
+				"name": "LimiteGlobal",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "monto",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "detalle",
+						"type": "string"
+					}
+				],
+				"name": "SaldoInsuficiente",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "usuario",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "cantidad",
+						"type": "uint256"
+					}
+				],
+				"name": "DepositoExitoso",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "usuario",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "cantidad",
+						"type": "uint256"
+					}
+				],
+				"name": "RetiroExitoso",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "bovedaPersonal",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cantidadDepositos",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cantidadRetiros",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "deposito",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_cantidadRetiro",
+						"type": "uint256"
+					}
+				],
+				"name": "retirar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "usuario",
+						"type": "address"
+					}
+				],
+				"name": "verSaldo",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"params": {
+						"_limiteDepositos": "Monto máximo permitido en el contrato (en wei)."
+					}
+				},
+				"deposito()": {
+					"details": "Verifica que no se exceda el límite global de depósitos."
+				},
+				"retirar(uint256)": {
+					"details": "Aplica límite de retiro por transacción y valida que el usuario tenga saldo suficiente.",
+					"params": {
+						"_cantidadRetiro": "Monto a retirar."
+					}
+				},
+				"verSaldo(address)": {
+					"params": {
+						"usuario": "Dirección del usuario."
+					},
+					"returns": {
+						"_0": "Saldo del usuario en wei."
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"bovedaPersonal(address)": {
+					"notice": "Bóveda personal de cada usuario, almacena cuánto ETH tiene depositado."
+				},
+				"cantidadDepositos()": {
+					"notice": "Contador del número de depósitos realizados en el contrato."
+				},
+				"cantidadRetiros()": {
+					"notice": "Contador del número de retiros realizados en el contrato."
+				},
+				"constructor": {
+					"notice": "Inicializa el contrato con un límite global de depósitos."
+				},
+				"deposito()": {
+					"notice": "Permite a un usuario depositar ETH en su bóveda personal."
+				},
+				"retirar(uint256)": {
+					"notice": "Permite a un usuario retirar fondos de su bóveda personal."
+				},
+				"verSaldo(address)": {
+					"notice": "Devuelve el saldo en la bóveda personal de un usuario."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Kipubank.sol": "Kipubank"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0xa535a5df777d44e945dd24aa43a11e44b024140fc340ad0dfe42acf4002aade1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://41319e7f621f2dc3733511332c4fd032f8e32ad2aa7fd6f665c19741d9941a34",
+				"dweb:/ipfs/QmcYR3bd862GD1Bc7jwrU9bGxrhUu5na1oP964bDCu2id1"
+			]
+		},
+		"contracts/Kipubank.sol": {
+			"keccak256": "0xfbbc9c99ddfaac7bf08826a16fa9365a1f6f0e60d2f76252894df92dc7bfb0a9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8c8bb1df33645032115ef4fa8ca890b5b6b2e9a559af6392e2d5ef70dec4c13d",
+				"dweb:/ipfs/QmQFeLCAhqW1P5kdX5AsZYkM13UMWuwuyTr7djZAbizQKx"
+			]
+		}
+	},
+	"version": 1
+}
